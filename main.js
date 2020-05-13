@@ -55,3 +55,15 @@ document.querySelector('#clear').onclick = () => {
     record = []
     canvasContext.clearRect(0, 0, canvas.width, canvas.height)
 }
+document.querySelector('#withdraw').onclick = () => {
+    record.pop()
+    canvasContext.clearRect(0, 0, canvas.width, canvas.height)
+    record.map(stroke => {
+        let previousPosition = stroke[0]
+        stroke.forEach((position) => {
+            drawLine(previousPosition, position, 'black')
+            previousPosition = position
+        })
+    })
+
+}
