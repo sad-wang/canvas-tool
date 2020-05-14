@@ -13,6 +13,7 @@ const convertPosition= (canvasRect, position) => {
         y: position.y - canvasRect.y
     }
 }
+
 const drawLine = (start, end, color) => {
     canvasContext.strokeStyle = color
     canvasContext.beginPath()
@@ -75,7 +76,18 @@ canvas.onmouseup = e => {
     record.push(stroke)
 }
 document.querySelector('#log').onclick = () => {
-    document.querySelector('.text').innerHTML = JSON.stringify(record)
+    console.log(1)
+    let transfer = document.createElement('input');
+    document.body.appendChild(transfer);
+    transfer.value = JSON.stringify(record);  // 这里表示想要复制的内容
+    transfer.focus();
+    transfer.select();
+    if (document.execCommand('copy')) {
+        document.execCommand('copy');
+    }
+    transfer.blur();
+    console.log('复制成功');
+    document.body.removeChild(transfer);
 }
 document.querySelector('#clear').onclick = () => {
     record = []
