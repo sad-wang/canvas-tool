@@ -42,10 +42,10 @@ canvas.onmousemove = e => {
 canvas.ontouchmove = e => {
     e.preventDefault()
     // 判断鼠标坐标超出范围
-    if (e.x < canvasRect.x || e.x > canvasRect.x + canvasRect.width || e.y < canvasRect.y || e.y > canvasRect.y + canvasRect.height)
+    if (e.touches[0].clientX < canvasRect.x || e.touches[0].clientX > canvasRect.x + canvasRect.width || e.touches[0].clientY < canvasRect.y || e.touches[0].clientY > canvasRect.y + canvasRect.height)
         strokeState = false
     else {
-        const currentPosition = { x: e.clientX, y: e.clientY }
+        const currentPosition = { x: e.touches[0].clientX, y: e.touches[0].clientY }
         const newPosition = convertPosition(canvasRect, currentPosition)
         // 判断当前是否在画
         if (strokeState) {
@@ -64,12 +64,11 @@ canvas.onmousedown = e => {
 canvas.ontouchstart = e => {
     strokeState = true
     stroke = []
-    position = convertPosition(canvasRect,{x: e.clientX, y: e.clientY})
+    position = convertPosition(canvasRect,{x: e.touches[0].clientX, y: e.touches[0].clientY})
 }
 canvas.ontouchend = e => {
-    strokeState = true
-    stroke = []
-    position = convertPosition(canvasRect,{x: e.clientX, y: e.clientY})
+    strokeState = false
+    record.push(stroke)
 }
 canvas.onmouseup = e => {
     strokeState = false
