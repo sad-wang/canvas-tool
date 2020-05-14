@@ -1,7 +1,7 @@
 const canvas = document.querySelector("#canvas")
 const canvasContext = canvas.getContext('2d')
-canvas.width = 1300
-canvas.height = 900
+canvas.width = document.documentElement.clientWidth
+canvas.height = document.documentElement.clientHeight
 const canvasRect = canvas.getClientRects()[0]
 let strokeState
 let position
@@ -75,7 +75,7 @@ canvas.onmouseup = e => {
     record.push(stroke)
 }
 document.querySelector('#log').onclick = () => {
-    console.log(JSON.stringify(record))
+    document.querySelector('.text').innerHTML = JSON.stringify(record)
 }
 document.querySelector('#clear').onclick = () => {
     record = []
