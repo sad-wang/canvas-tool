@@ -39,7 +39,7 @@ canvas.onmousemove = e => {
         }
     }
 }
-canvas.touchmove = e => {
+canvas.ontouchmove = e => {
     e.preventDefault()
     // 判断鼠标坐标超出范围
     if (e.x < canvasRect.x || e.x > canvasRect.x + canvasRect.width || e.y < canvasRect.y || e.y > canvasRect.y + canvasRect.height)
@@ -61,12 +61,12 @@ canvas.onmousedown = e => {
     stroke = []
     position = convertPosition(canvasRect,{x: e.clientX, y: e.clientY})
 }
-canvas.touchstart = e => {
+canvas.ontouchstart = e => {
     strokeState = true
     stroke = []
     position = convertPosition(canvasRect,{x: e.clientX, y: e.clientY})
 }
-canvas.touchend = e => {
+canvas.ontouchend = e => {
     strokeState = true
     stroke = []
     position = convertPosition(canvasRect,{x: e.clientX, y: e.clientY})
