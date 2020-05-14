@@ -24,6 +24,25 @@ const drawLine = (start, end, color) => {
 }
 canvas.onmousemove = e => {
     e.preventDefault()
+    console.log(e)
+    // 判断鼠标坐标超出范围
+    if (e.x < canvasRect.x || e.x > canvasRect.x + canvasRect.width || e.y < canvasRect.y || e.y > canvasRect.y + canvasRect.height)
+        strokeState = false
+    else {
+        const currentPosition = { x: e.clientX, y: e.clientY }
+        const newPosition = convertPosition(canvasRect, currentPosition)
+        // 判断当前是否在画
+        if (strokeState) {
+            // 画
+            stroke.push(position)
+            drawLine(position, newPosition, 'black')
+            position = newPosition
+        }
+    }
+}
+canvas.touchmove = e => {
+    e.preventDefault()
+    console.log(e)
     // 判断鼠标坐标超出范围
     if (e.x < canvasRect.x || e.x > canvasRect.x + canvasRect.width || e.y < canvasRect.y || e.y > canvasRect.y + canvasRect.height)
         strokeState = false
@@ -40,6 +59,16 @@ canvas.onmousemove = e => {
     }
 }
 canvas.onmousedown = e => {
+    strokeState = true
+    stroke = []
+    position = convertPosition(canvasRect,{x: e.clientX, y: e.clientY})
+}
+canvas.touchstart = e => {
+    strokeState = true
+    stroke = []
+    position = convertPosition(canvasRect,{x: e.clientX, y: e.clientY})
+}
+canvas.touchend = e => {
     strokeState = true
     stroke = []
     position = convertPosition(canvasRect,{x: e.clientX, y: e.clientY})
