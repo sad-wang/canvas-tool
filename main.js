@@ -42,7 +42,6 @@ canvas.onmousemove = e => {
 }
 canvas.touchmove = e => {
     e.preventDefault()
-    console.log(e)
     // 判断鼠标坐标超出范围
     if (e.x < canvasRect.x || e.x > canvasRect.x + canvasRect.width || e.y < canvasRect.y || e.y > canvasRect.y + canvasRect.height)
         strokeState = false
